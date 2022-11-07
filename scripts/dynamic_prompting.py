@@ -55,7 +55,7 @@ class Script(scripts.Script):
 
         if is_combinatorial:
             prompt_generator = CombinatorialPromptGenerator(wildcard_manager, original_prompt)
-            prompt_generator = BatchedCombinatorialPromptGenerator(prompt_generator, combinatorial_batches)
+            prompt_generator = BatchedCombinatorialPromptGenerator(prompt_generator, p.n_iter)
         else:
             prompt_generator = RandomPromptGenerator(wildcard_manager, original_prompt, original_seed)
 

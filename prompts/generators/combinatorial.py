@@ -57,7 +57,15 @@ class CombinatorialPromptGenerator(PromptGenerator):
     def generate(self, max_prompts=constants.MAX_IMAGES) -> list[str]:
         templates = [self._template]
         all_prompts = []
+    
+        new_prompts = self.generate_from_wildcards(templates[0])
 
+        for prompt in new_prompts:
+            all_prompts.append(prompt)
+
+        return all_prompts
+
+        '''
         while True:
             all_prompts = list(set(all_prompts))
             if len(templates) == 0 or len(all_prompts) > max_prompts:
@@ -70,12 +78,12 @@ class CombinatorialPromptGenerator(PromptGenerator):
             template = templates.pop(0)
             new_prompts = self.generate_from_variants(template)
             no_new_prompts = len(new_prompts) == 1
-
             if no_new_prompts:
                 all_prompts.append(new_prompts[0])
             else:
                 templates.extend(new_prompts)
 
         return all_prompts[:max_prompts]
+        '''
 
 
