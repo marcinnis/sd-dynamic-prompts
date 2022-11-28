@@ -64,6 +64,9 @@ class Script(scripts.Script):
         
         num_images = p.n_iter * p.batch_size
         all_prompts = prompt_generator.generate(num_images)
+        print("ALL")
+        all_prompts.sort()
+        print(all_prompts)
         updated_count = len(all_prompts)
         p.n_iter = math.ceil(updated_count / p.batch_size)
 
@@ -72,12 +75,13 @@ class Script(scripts.Script):
         else:
             all_seeds = [int(p.seed) + (x if p.subseed_strength == 0 else 0) for x in range(updated_count)]
 
-        logger.info(f"Prompt matrix will create {updated_count} images in a total of {p.n_iter} batches.")
+        print(f"Prompt matrix will create {updated_count} images in a total of {p.n_iter} batches.")
 
         p.prompt = all_prompts
         p.seed = all_seeds
 
         p.prompt_for_display = original_prompt
+
         processed = process_images(p)
 
         p.prompt = original_prompt
