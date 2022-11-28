@@ -64,9 +64,7 @@ class Script(scripts.Script):
         
         num_images = p.n_iter * p.batch_size
         all_prompts = prompt_generator.generate(num_images)
-        print("ALL")
         all_prompts.sort()
-        print(all_prompts)
         updated_count = len(all_prompts)
         p.n_iter = math.ceil(updated_count / p.batch_size)
 
